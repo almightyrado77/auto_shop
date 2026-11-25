@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="categories">
+    <a href="/" class="{{ 'active' if selected is none }}">Всички</a>
+    {% for c in categories %}
+        <a href="/?category={{ c.id }}" class="{{ 'active' if selected == c.id }}">{{ c.name }}</a>
+    {% endfor %}
+</nav>
+
+<div class="products">
+    {% for p in products %}
+        <article class="product">
+            <h3>{{ p.name }}</h3>
+            <p class="category">{{ p.category }}</p>
+            <p class="price">{{ "%.2f"|format(p.price) }} €</p>
+            <p class="stock">
+                {% if p.stock > 0 %}В наличност{% else %}Изчерпан{% endif %}
+            </p>
+        </article>
+    {% else %}
+        <p>Няма продукти в тази категория.</p>
+    {% endfor %}
+</div>
+{% endblock %}
