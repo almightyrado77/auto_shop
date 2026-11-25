@@ -63,3 +63,20 @@ def get_product(product_id):
                 {"name": r[0], "value": r[1]} for r in cur.fetchall()
             ]
             return product
+
+def get_products_by_ids(ids):
+    """Връща {id: продукт} за няколко продукта с една заявка."""
+    ids = list(ids)
+    if not ids:
+        return {}
+
+    placeholders = ", ".join(f":{i + 1}" for i in range(len(ids)))
+    sql = f"SELECT id, name, price, stock FROM products WHERE id IN ({placeholders})"
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql, ids)
+            return {
+                r[0]: {"id": r[0], "name": r[1], "price": r[2], "stock": r[3]}
+                for r in cur.fetchall()
+            }

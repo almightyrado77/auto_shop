@@ -114,3 +114,51 @@ main {
     font-weight: normal;
     width: 40%;
 }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-link {
+    font-size: 1rem;
+}
+
+.button,
+button {
+    padding: 8px 14px;
+    background: #2563eb;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+}
+
+form.inline {
+    display: inline;
+}
+
+.cart {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.cart th,
+.cart td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.cart input[type="number"] {
+    width: 70px;
+    padding: 6px;
+}
+
+.total {
+    margin-top: 16px;
+    font-size: 1.3rem;
+    font-weight: bold;
+}

@@ -16,6 +16,12 @@
         <p>{{ product.description }}</p>
     {% endif %}
 
+    {% if product.stock > 0 %}
+    <form method="post" action="{{ url_for('cart_add', product_id=product.id) }}">
+        <button type="submit" class="button">Добави в количката</button>
+    </form>
+    {% endif %}
+
     {% if product.attributes %}
         <h2>Характеристики</h2>
         <table class="attributes">

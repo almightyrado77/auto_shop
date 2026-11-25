@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Количка{% endblock %}
+
+{% block content %}
+<h1>Количка</h1>
+
+{% if items %}
+<table class="cart">
+    <tr>
+        <th>Продукт</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Сума</th>
+        <th></th>
+    </tr>
+    {% for i in items %}
+    <tr>
+        <td><a href="{{ url_for('product_page', product_id=i.id) }}">{{ i.name }}</a></td>
+        <td>{{ "%.2f"|format(i.price) }} €</td>
+        <td>
+            <form method="post" action="{{ url_for('cart_update', product_id=i.id) }}" class="inline">
+                <input type="number" name="quantity" value="{{ i.quantity }}" min="0" max="{{ i.stock }}">
+                <button type="submit">Обнови</button>
+            </form>
+        </td>
+        <td>{{ "%.2f"|format(i.subtotal) }} €</td>
+        <td>
+            <form method="post" action="{{ url_for('cart_remove', product_id=i.id) }}" class="inline">
+                <button type="submit">Махни</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p class="total">Общо: {{ "%.2f"|format(total) }} €</p>
+{% else %}
+<p>Количката е празна.</p>
+<p><a href="/">Към каталога</a></p>
+{% endif %}
+{% endblock %}
