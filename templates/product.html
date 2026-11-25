@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<p><a href="/?category={{ product.category_id }}">&larr; {{ product.category }}</a></p>
+
+<article class="product-detail">
+    <h1>{{ product.name }}</h1>
+    <p class="price">{{ "%.2f"|format(product.price) }} €</p>
+    <p class="stock">
+        {% if product.stock > 0 %}В наличност: {{ product.stock }} бр.{% else %}Изчерпан{% endif %}
+    </p>
+
+    {% if product.description %}
+        <p>{{ product.description }}</p>
+    {% endif %}
+
+    {% if product.attributes %}
+        <h2>Характеристики</h2>
+        <table class="attributes">
+            {% for a in product.attributes %}
+                <tr>
+                    <th>{{ a.name }}</th>
+                    <td>{{ a.value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</article>
+{% endblock %}
