@@ -20,6 +20,7 @@
         <td>{{ "%.2f"|format(i.price) }} €</td>
         <td>
             <form method="post" action="{{ url_for('cart_update', product_id=i.id) }}" class="inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="number" name="quantity" value="{{ i.quantity }}" min="0" max="{{ i.stock }}">
                 <button type="submit">Обнови</button>
             </form>
@@ -27,6 +28,7 @@
         <td>{{ "%.2f"|format(i.subtotal) }} €</td>
         <td>
             <form method="post" action="{{ url_for('cart_remove', product_id=i.id) }}" class="inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit">Махни</button>
             </form>
         </td>
@@ -35,6 +37,7 @@
 </table>
 
 <p class="total">Общо: {{ "%.2f"|format(total) }} €</p>
+<a class="button" href="{{ url_for('checkout') }}">Към поръчката</a>
 {% else %}
 <p>Количката е празна.</p>
 <p><a href="/">Към каталога</a></p>

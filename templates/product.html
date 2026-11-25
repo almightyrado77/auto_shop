@@ -18,6 +18,7 @@
 
     {% if product.stock > 0 %}
     <form method="post" action="{{ url_for('cart_add', product_id=product.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button type="submit" class="button">Добави в количката</button>
     </form>
     {% endif %}

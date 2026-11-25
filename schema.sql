@@ -30,13 +30,16 @@ CREATE TABLE IF NOT EXISTS product_attributes (
 );
 
 CREATE TABLE IF NOT EXISTS orders (
-    id         NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    user_id    NUMBER NOT NULL REFERENCES users (id),
-    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
-    status     VARCHAR2(20) DEFAULT 'new' NOT NULL,
-    total      NUMBER(10, 2) NOT NULL,
-    address    VARCHAR2(500) NOT NULL,
-    phone      VARCHAR2(30) NOT NULL
+    id            NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id       NUMBER REFERENCES users (id),
+    contact_name  VARCHAR2(100) NOT NULL,
+    contact_email VARCHAR2(255) NOT NULL,
+    public_token  VARCHAR2(64) NOT NULL UNIQUE,
+    created_at    TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    status        VARCHAR2(20) DEFAULT 'new' NOT NULL,
+    total         NUMBER(10, 2) NOT NULL,
+    address       VARCHAR2(500) NOT NULL,
+    phone         VARCHAR2(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS order_items (

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Поръчка{% endblock %}
+
+{% block content %}
+<h1>Поръчка</h1>
+
+{% if errors %}
+<ul class="errors">
+    {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+</ul>
+{% endif %}
+
+<table class="cart">
+    <tr><th>Продукт</th><th>Количество</th><th>Сума</th></tr>
+    {% for i in items %}
+    <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.quantity }}</td>
+        <td>{{ "%.2f"|format(i.subtotal) }} €</td>
+    </tr>
+    {% endfor %}
+</table>
+<p class="total">Общо: {{ "%.2f"|format(total) }} €</p>
+
+<form method="post" class="auth-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {% if not session.get('user_id') %}
+        <p>Имаш акаунт? <a href="{{ url_for('login') }}">Влез</a>, за да не въвеждаш данните всеки път.</p>
+        {% endif %}
+
+        <label>Име
+            <input type="text" name="contact_name"
+                   value="{{ form.get('contact_name', session.get('user_name', '')) }}"
+                   maxlength="100" required>
+        </label>
+        <label>Имейл
+            <input type="email" name="contact_email"
+                   value="{{ form.get('contact_email', session.get('user_email', '')) }}"
+                   maxlength="255" required>
+        </label>
+    <label>Адрес за доставка
+        <textarea name="address" rows="3" maxlength="500" required>{{ form.get('address', '') }}</textarea>
+    </label>
+    <label>Телефон
+        <input type="tel" name="phone" value="{{ form.get('phone', '') }}" maxlength="30" required>
+    </label>
+
+    <label class="check">
+        <input type="checkbox" name="want_part" {% if form.get('want_part') %}checked{% endif %}>
+        Търся авточаст, която я няма в каталога
+    </label>
+
+    <fieldset class="part-request">
+        <legend>Заявка за авточаст</legend>
+        <label>Марка
+            <input type="text" name="car_make" value="{{ form.get('car_make', '') }}" maxlength="50">
+        </label>
+        <label>Модел
+            <input type="text" name="car_model" value="{{ form.get('car_model', '') }}" maxlength="50">
+        </label>
+        <label>Година
+            <input type="number" name="car_year" value="{{ form.get('car_year', '') }}" min="1950" max="2100">
+        </label>
+        <label>VIN (по желание, 17 символа)
+            <input type="text" name="vin" value="{{ form.get('vin', '') }}" maxlength="17">
+        </label>
+        <label>Коя част търсиш?
+            <textarea name="part_description" rows="3" maxlength="2000">{{ form.get('part_description', '') }}</textarea>
+        </label>
+    </fieldset>
+
+    <button type="submit">Потвърди поръчката</button>
+</form>
+{% endblock %}

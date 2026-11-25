@@ -162,3 +162,86 @@ form.inline {
     font-size: 1.3rem;
     font-weight: bold;
 }
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-nav a,
+.header-nav span {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.link-button {
+    padding: 0;
+    background: none;
+    color: #fff;
+    text-decoration: underline;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 380px;
+}
+
+.auth-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.auth-form input {
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+.errors {
+    max-width: 380px;
+    padding: 10px 14px 10px 30px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    color: #991b1b;
+}
+
+.auth-form textarea {
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+.auth-form label.check {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.part-request {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+.button {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.note {
+    padding: 10px 14px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Поръчка №{{ order.id }}{% endblock %}
+
+{% block content %}
+<h1>Благодарим! Поръчка №{{ order.id }}</h1>
+
+<table class="cart">
+    <tr><th>Продукт</th><th>Количество</th><th>Цена</th></tr>
+    {% for i in order['items'] %}
+    <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.quantity }}</td>
+        <td>{{ "%.2f"|format(i.unit_price) }} €</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p class="total">Общо: {{ "%.2f"|format(order.total) }} €</p>
+<p>Адрес: {{ order.address }}</p>
+<p>Телефон: {{ order.phone }}</p>
+<p class="note">
+    Запази адреса на тази страница, за да можеш да видиш поръчката си по-късно.
+    Всеки, който има този адрес, може да я види.
+</p>
+
+{% if order.part_requests %}
+<h2>Заявка за авточаст</h2>
+{% for r in order.part_requests %}
+    <p>{{ r.make }} {{ r.model }}{% if r.year %} ({{ r.year }}){% endif %}: {{ r.description }}</p>
+{% endfor %}
+<p>Ще се свържем с теб, когато намерим частта.</p>
+{% endif %}
+
+<p><a href="/">Към каталога</a></p>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<h1>Вход</h1>
+
+{% if error %}
+<ul class="errors"><li>{{ error }}</li></ul>
+{% endif %}
+
+<form method="post" class="auth-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <label>Имейл
+        <input type="email" name="email" required>
+    </label>
+    <label>Парола
+        <input type="password" name="password" required>
+    </label>
+
+    <button type="submit">Вход</button>
+</form>
+
+<p>Нямаш акаунт? <a href="{{ url_for('register') }}">Регистрация</a></p>
+{% endblock %}
